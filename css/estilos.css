@@ -1,0 +1,165 @@
+/* ===== PALETA (sacada del logo de Stormline Motors) ===== */
+:root {
+    --azul: #1a2b3b;
+    --azul-claro: #243d52;
+    --oro: #f8b018;
+    --crema: #f8f8e0;
+}
+
+/* ===== GENERAL ===== */
+body {
+    background: radial-gradient(circle at 50% 0%, #2f4a63 0%, var(--azul) 60%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--crema);
+}
+
+h1, h2 {
+    color: var(--oro);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 800;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+a {
+    color: var(--oro);
+}
+
+a:hover {
+    color: var(--crema);
+}
+
+/* El rayo del logo delante de los títulos principales */
+h1::before,
+.card h2::before {
+    content: "";
+    display: inline-block;
+    width: 0.6em;
+    height: 1em;
+    margin-right: 0.4em;
+    background-color: var(--oro);
+    clip-path: polygon(60% 0%, 10% 55%, 45% 55%, 30% 100%, 90% 40%, 55% 40%);
+}
+
+/* ===== TARJETAS Y FORMULARIOS (login, registro, agregar...) ===== */
+.card {
+    background-color: var(--azul-claro);
+    color: var(--crema);
+    border: 2px solid var(--oro);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(248, 176, 24, 0.25);
+}
+
+.logo {
+    display: block;
+    width: 110px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+}
+
+.form-label {
+    color: var(--crema);
+    font-weight: bold;
+}
+
+.form-control {
+    background-color: var(--azul);
+    color: var(--crema);
+    border: 1px solid #44617b;
+}
+
+.form-control::placeholder {
+    color: #8ea3b6;
+}
+
+.form-control:focus {
+    background-color: var(--azul);
+    color: var(--crema);
+    border-color: var(--oro);
+    box-shadow: 0 0 8px var(--oro);
+}
+
+/* ===== BOTONES ===== */
+.btn-oro {
+    background-color: var(--oro);
+    color: var(--azul);
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-oro:hover {
+    background-color: var(--crema);
+    color: var(--azul);
+    transform: translateY(-2px);
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background-color: var(--azul);
+    border-bottom: 3px solid var(--oro);
+}
+
+.navbar .navbar-brand {
+    color: var(--oro);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.navbar .navbar-brand img {
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: var(--crema);
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+    color: var(--oro);
+}
+
+.navbar .navbar-text {
+    color: var(--crema);
+}
+
+.navbar .fa-cart-shopping {
+    color: var(--oro);
+    font-size: 1.2rem;
+}
+
+.navbar .btn-outline-light {
+    color: var(--oro);
+    border-color: var(--oro);
+}
+
+.navbar .btn-outline-light:hover {
+    background-color: var(--oro);
+    color: var(--azul);
+}
+
+/* ===== TABLAS (coches, mis coches) ===== */
+.table-responsive {
+    background-color: white;
+    border: 2px solid var(--oro);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(248, 176, 24, 0.25);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table-dark {
+    --bs-table-bg: var(--azul-claro);
+    --bs-table-color: var(--oro);
+    --bs-table-border-color: var(--oro);
+}
+
