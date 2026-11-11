@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ekaitz Ibáñez">
+    <title>Coches</title>
+    <link rel="icon" type="image/png" href="img/stormlinemotors.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="coches.html"><img src="img/stormlinemotors.png" alt="StormLine Motors" height="100"></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="coches.html">Coches</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mis_coches.html">Mis coches</a></li>
+                    <li class="nav-item"><a class="nav-link" href="estadisticas.html">Estadísticas</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <span class="navbar-text me-3">Usuario</span>
+                    <a href="carrito.html" class="text-white me-3"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="login.html" class="btn btn-outline-light btn-sm">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Coches disponibles</h1>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Descripción</th>
+                        <th>Km</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>Imagen</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ford Mustang Dark Horse</td>
+                        <td>Deportivo americano con motor V8 5.0L</td>
+                        <td>5.000</td>
+                        <td>62.000 €</td>
+                        <td>Segunda mano</td>
+                        <td><img src="img/mustangDH.jpg" class="img-thumbnail" width="80" alt="Ford Mustang"></td>
+                        <td><span class="badge bg-success">Disponible</span></td>
+                        <td><button class="btn btn-success btn-sm">Añadir al carrito</button></td>
+                    </tr>
+                        <td>Ferrari Daytona SP3</td>
+                        <td>Edición ultra exclusiva de la serie Icona con V12 atmosférico de 840 CV a 9.500 rpm</td>
+                        <td>0</td>
+                        <td>8.800.000 €</td>
+                        <td>Nuevo</td>
+                        <td><img src="img/sp3.jpg" class="img-thumbnail" width="80" alt="Ferrari Daytona SP3"></td>
+                        <td><span class="badge bg-success">Disponible</span></td>
+                        <td><button class="btn btn-success btn-sm">Añadir al carrito</button></td>
+                    </tr>
+                    </tr>
+                        <td>Ferrari F40</td>
+                        <td>El purista definitivo: el último superdeportivo V8 biturbo aprobado en vida por Enzo Ferrari</td>
+                        <td>18.500</td>
+                        <td>4.900.000 €</td>
+                        <td>Segunda mano</td>
+                        <td><img src="img/f40.jpg" class="img-thumbnail" width="80" alt="Ferrari F40"></td>
+                        <td><span class="badge bg-success">Disponible</span></td>
+                        <td><button class="btn btn-success btn-sm">Añadir al carrito</button></td>
+                    </tr>
+                    </tr>
+                        <td>Lamborghini Revuelto</td>
+                        <td>Superdeportivo V12 híbrido enchufable de 1.015 CV con chasis de fibra de carbono</td>
+                        <td>26</td>
+                        <td>620.000 €</td>
+                        <td>Nuevo</td>
+                        <td><img src="img/revuelto.jpg" class="img-thumbnail" width="80" alt="Lamborghini Revuelto"></td>
+                        <td><span class="badge bg-success">Disponible</span></td>
+                        <td><button class="btn btn-success btn-sm">Añadir al carrito</button></td>
+                    </tr>
+                    <tr>
+                        <td>Koenigsegg Jesko Attack</td>
+                        <td>Hiperdeportivo sueco con V8 biturbo de 1.600 CV y alerón de alta carga aerodinámica</td>
+                        <td>0</td>
+                        <td>3.400.000 €</td>
+                        <td>Nuevo</td>
+                        <td><img src="img/jesko.jpg" class="img-thumbnail" width="80" alt="Koenigsegg Jesko Attack"></td>
+                        <td><span class="badge bg-success">Disponible</span></td>
+                        <td><button class="btn btn-success btn-sm">Añadir al carrito</button></td>
+                    </tr>
+                    <tr>
+                        <td>Tesla Cybertruck</td>
+                        <td>Pick-up eléctrica futurista con exoesqueleto de acero; unidad importada de EE. UU.</td>
+                        <td>1.500</td>
+                        <td>145.000 €</td>
+                        <td>Km 0</td>
+                        <td><img src="img/cybertruck.jpg" class="img-thumbnail" width="80" alt="Tesla Cybertruck"></td>
+                        <td><span class="badge bg-secondary">Comprado</span></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Ford GT Heritage Edition</td>
+                        <td>Edición especial de colección en librea Gulf con V6 EcoBoost biturbo de 660 CV</td>
+                        <td>850</td>
+                        <td>1.150.000 €</td>
+                        <td>Km 0</td>
+                        <td><img src="img/fordgt.jpg" class="img-thumbnail" width="80" alt="ord GT Heritage Edition"></td>
+                        <td><span class="badge bg-success">Disponible</span></td>
+                        <td><button class="btn btn-success btn-sm">Añadir al carrito</button></td>
+                    </tr>
+                    <tr>
+                        <td>Nissan GT-R R34 V-Spec II</td>
+                        <td>Leyenda JDM con motor RB26DETT; unidad conservada al detalle e importada de Japón</td>
+                        <td>68.000</td>
+                        <td>210.000 €</td>
+                        <td>Segunda mano</td>
+                        <td><img src="img/r34.jpg" class="img-thumbnail" width="80" alt="Nissan GT-R R34 V-Spec II"></td>
+                        <td><span class="badge bg-success">Disponible</span></td>
+                        <td><button class="btn btn-success btn-sm">Añadir al carrito</button></td>
+                    </tr>
+                    <tr>
+                        <td>Toyota Celica GT-Four</td>
+                        <td>Icono del WRC con tracción total 4WD, turbo e iluminación neón bajo el chasis; importado de Japón</td>
+                        <td>112.000</td>
+                        <td>32.000 €</td>
+                        <td>Segunda mano</td>
+                        <td><img src="img/celica.jpg" class="img-thumbnail" width="80" alt="Toyota Celica GT-Four"></td>
+                        <td><span class="badge bg-secondary">Comprado</span></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Mercedes-Benz SLS AMG</td>
+                        <td>"Alas de gaviota" moderno equipado con el emblemático motor V8 atmosférico 6.2L</td>
+                        <td>24.000</td>
+                        <td>3235.000 €</td>
+                        <td>Segunda mano</td>
+                        <td><img src="img/sls.jpg" class="img-thumbnail" width="80" alt="Mercedes-Benz SLS AMG"></td>
+                        <td><span class="badge bg-secondary">Comprado</span></td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
