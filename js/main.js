@@ -19,7 +19,7 @@ function cargarCoches() {
         .then(coches => {
             console.log(coches);  
             todos = coches;
-            dibujar(todos);
+            aplicarFiltros();
         })
         .catch(error => {
             document.getElementById("cuerpoCoches").innerHTML =
@@ -31,6 +31,10 @@ function dibujar(lista) {
     let cuerpo = document.getElementById("cuerpoCoches");
     cuerpo.innerHTML = "";
 
+    if (lista.length === 0) {
+        cuerpo.innerHTML = `<tr><td colspan="8" class="text-center">No hay coches con esos criterios</td></tr>`;
+        return;
+    }
     lista.forEach(c => {
         let comprado = c.state=== "Comprado";
 
@@ -55,5 +59,23 @@ function dibujar(lista) {
             </tr>`;
     });
 }
+function aplicarFiltros() {
+    let texto = document.getElementById("buscador").value.toLowerCase();
+    let categoria = document.getElementById("filtroCategoria").value.toLowerCase();
+    let orden = document.getElementById("orden").value;
 
+    let resultado = todos.filter(c => (c.name || "").toLowerCase().includes(texto));
+
+    if (categoria !== "") {
+        resultado = resultado.filter(c => (c.category || "").toLowerCase() === categoria);
+    }
+
+    if (orden === "asc") {
+        resultado.sort((a, b) => Number(a.price) - Number(b.price));
+    } else if (orden === "desc") {
+        resultado.sort((a, b) => Number(b.price) - Number(a.price));
+    }
+
+    dibujar(resultado);
+}
 cargarCoches();

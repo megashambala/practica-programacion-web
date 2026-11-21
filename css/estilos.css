@@ -167,3 +167,7 @@ h1::before,
     width: 250px;
     height: 130px;
 }
+.form-select:focus {
+    border-color: var(--oro);
+    box-shadow: 0 0 8px var(--oro);
+}
