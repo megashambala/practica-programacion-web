@@ -163,3 +163,7 @@ h1::before,
     --bs-table-border-color: var(--oro);
 }
 
+.foto-coche {
+    width: 250px;
+    height: 130px;
+}

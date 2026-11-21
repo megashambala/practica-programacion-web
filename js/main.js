@@ -49,7 +49,7 @@ function dibujar(lista) {
                 <td>${c.km}</td>
                 <td>${c.price} €</td>
                 <td>${c.category}</td>
-                <td><img src="${c.image}" class="img-thumbnail" width="80" alt="${c.name}"></td>
+                <td><img src="${c.image}" class="img-thumbnail foto-coche" alt="${c.name}"></td>
                 <td>${estado}</td>
                 <td>${boton}</td>
             </tr>`;
