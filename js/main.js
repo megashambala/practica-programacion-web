@@ -78,4 +78,118 @@ function aplicarFiltros() {
 
     dibujar(resultado);
 }
-cargarCoches();
+function cargarMisCoches() {
+    let token = localStorage.getItem("token");
+    let usuario = localStorage.getItem("usuario");
+
+    fetch(`${API}/cars`, {
+        headers: { "Authorization": `Bearer ${token}` }
+    })
+        .then(response => {
+            if (response.status === 401) {
+                cerrarSesion();
+                throw new Error("Sesión caducada");
+            }
+            if (!response.ok) throw new Error("No se pudieron cargar tus coches");
+            return response.json();
+        })
+        .then(coches => {
+            let mios = coches.filter(c => c.idUser === usuario);
+            dibujarMisCoches(mios);
+        })
+        .catch(error => {
+            document.getElementById("cuerpoMisCoches").innerHTML =
+                `<tr><td colspan="8">${error.message}</td></tr>`;
+        });
+}
+
+function dibujarMisCoches(lista) {
+    let cuerpo = document.getElementById("cuerpoMisCoches");
+    cuerpo.innerHTML = "";
+
+    if (lista.length === 0) {
+        cuerpo.innerHTML = `<tr><td colspan="8" class="text-center">Todavía no has publicado ningún coche</td></tr>`;
+        return;
+    }
+
+    lista.forEach(c => {
+        let estado = c.state === "Comprado"
+            ? `<span class="badge bg-secondary">Comprado</span>`
+            : `<span class="badge bg-warning text-dark">En venta</span>`;
+
+        cuerpo.innerHTML += `
+            <tr>
+                <td>${c.name}</td>
+                <td>${c.description}</td>
+                <td>${c.km}</td>
+                <td>${c.price} €</td>
+                <td>${c.category}</td>
+                <td><img src="${c.image}" class="img-thumbnail foto-coche" alt="${c.name}"></td>
+                <td>${estado}</td>
+                <td>
+                    <a href="editar.html?id=${c._id}" class="btn btn-warning btn-sm">Editar</a>
+                    <button class="btn btn-danger btn-sm" onclick="eliminarCoche('${c._id}')">Eliminar</button>
+                </td>
+            </tr>`;
+    });
+}
+
+function eliminarCoche(id) {
+    if (!confirm("¿Seguro que quieres eliminar este coche?")) return;
+
+    let token = localStorage.getItem("token");
+
+    fetch(`${API}/cars/${id}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("No se pudo eliminar el coche");
+            mostrarMensaje("Coche eliminado", "success");
+            cargarMisCoches();
+        })
+        .catch(error => {
+            mostrarMensaje(error.message, "danger");
+        });
+}
+
+function agregarCoche(event) {
+    event.preventDefault();
+
+    let token = localStorage.getItem("token");
+
+    let coche = {
+        name: document.getElementById("nombre").value,
+        price: Number(document.getElementById("precio").value),
+        km: Number(document.getElementById("km").value),
+        category: document.getElementById("categoria").value,
+        description: document.getElementById("descripcion").value,
+        image: document.getElementById("imagen").value,
+        idUser: localStorage.getItem("usuario")
+    };
+
+    fetch(`${API}/cars`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(coche)
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("No se pudo publicar el coche");
+            mostrarMensaje("Coche publicado. Redirigiendo...", "success");
+            setTimeout(() => {
+                window.location.href = "mis_coches.html";
+            }, 1500);
+        })
+        .catch(error => {
+            mostrarMensaje(error.message, "danger");
+        });
+}
+if (document.getElementById("cuerpoCoches")) {
+    cargarCoches();
+}
+if (document.getElementById("cuerpoMisCoches")) {
+    cargarMisCoches();
+}
