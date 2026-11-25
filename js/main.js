@@ -204,9 +204,80 @@ function agregarCoche(event) {
             mostrarMensaje(error.message, "danger");
         });
 }
+let cocheEditando = null;
+
+function cargarCocheParaEditar() {
+    let id = new URLSearchParams(window.location.search).get("id");
+    let token = localStorage.getItem("token");
+
+    fetch(`${API}/cars/${id}`, {
+        headers: { "Authorization": `Bearer ${token}` }
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("No se encontró el coche");
+            return response.json();
+        })
+        .then(coche => {
+            if (coche.idUser !== localStorage.getItem("usuario")) {
+                window.location.href = "mis_coches.html";
+                return;
+            }
+            cocheEditando = coche;
+            document.getElementById("nombre").value = coche.name;
+            document.getElementById("descripcion").value = coche.description;
+            document.getElementById("precio").value = coche.price;
+            document.getElementById("km").value = coche.km;
+            document.getElementById("categoria").value = coche.category;
+            document.getElementById("imagen").value = coche.image;
+        })
+        .catch(error => {
+            mostrarMensaje(error.message, "danger");
+        });
+}
+
+function guardarCambios(event) {
+    event.preventDefault();
+
+    if (!cocheEditando) return;
+
+    let id = new URLSearchParams(window.location.search).get("id");
+    let token = localStorage.getItem("token");
+
+    let coche = {
+        name: document.getElementById("nombre").value,
+        price: Number(document.getElementById("precio").value),
+        km: Number(document.getElementById("km").value),
+        category: document.getElementById("categoria").value,
+        description: document.getElementById("descripcion").value,
+        image: document.getElementById("imagen").value,
+        idUser: cocheEditando.idUser
+    };
+
+    fetch(`${API}/cars/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(coche)
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("No se pudieron guardar los cambios");
+            mostrarMensaje("Cambios guardados. Redirigiendo...", "success");
+            setTimeout(() => {
+                window.location.href = "mis_coches.html";
+            }, 1500);
+        })
+        .catch(error => {
+            mostrarMensaje(error.message, "danger");
+        });
+}
 if (document.getElementById("cuerpoCoches")) {
     cargarCoches();
 }
 if (document.getElementById("cuerpoMisCoches")) {
     cargarMisCoches();
+}
+if (document.getElementById("formEditar")) {
+    cargarCocheParaEditar();
 }
