@@ -26,25 +26,33 @@ function cargarCoches() {
                 `<tr><td colspan="8">${error.message}</td></tr>`;
         });
 }
-
+function obtenerCarrito() {
+    return JSON.parse(localStorage.getItem("carrito")) || [];
+}
 function dibujar(lista) {
     let cuerpo = document.getElementById("cuerpoCoches");
     cuerpo.innerHTML = "";
-
+    let usuario = localStorage.getItem("usuario");
+    let carrito = obtenerCarrito();
     if (lista.length === 0) {
         cuerpo.innerHTML = `<tr><td colspan="8" class="text-center">No hay coches con esos criterios</td></tr>`;
         return;
     }
     lista.forEach(c => {
         let comprado = c.state=== "Comprado";
-
         let estado = comprado
-            ? `<span class="badge bg-secondary">Comprado</span>`
-            : `<span class="badge bg-warning text-dark">Disponible</span>`;
-
-        let boton = comprado
-            ? "-"
-            : `<button class="btn btn-oro btn-sm">Añadir al carrito</button>`;
+        ? `<span class="badge bg-secondary">Comprado</span>`
+        : `<span class="badge bg-warning text-dark">Disponible</span>`;
+        let boton;
+        if (comprado) {
+            boton = "-";
+        } else if (c.idUser === usuario) {
+            boton = `<span class="text-secondary">Tu coche</span>`;
+        } else if (carrito.some(item => item._id === c._id)) {
+            boton = `<button class="btn btn-secondary btn-sm" disabled>En el carrito</button>`;
+        } else {
+            boton = `<button class="btn btn-oro btn-sm" onclick="anadirAlCarrito('${c._id}')">Añadir al carrito</button>`;
+        }
 
         cuerpo.innerHTML += `
             <tr>
@@ -58,6 +66,15 @@ function dibujar(lista) {
                 <td>${boton}</td>
             </tr>`;
     });
+}
+function anadirAlCarrito(id) {
+    let coche = todos.find(c => c._id === id);
+    let carrito = obtenerCarrito();
+
+    carrito.push(coche);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    aplicarFiltros();
 }
 function aplicarFiltros() {
     let texto = document.getElementById("buscador").value.toLowerCase();
